@@ -1,9 +1,17 @@
-import Image from 'next/image'
+import AboutProduct from '@/views/Home/AboutProduct'
+import HeroComp from '@/views/Home/HeroComp'
+import NewsLetterComp from '@/views/Home/NewsLetterComp'
+import Products from '@/views/Home/Products'
+import PromotionComp from '@/views/Home/PromotionComp'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-white text-black">
-      <h1>THIS IS THE MAIN DIV</h1>
+    <main className="">
+      <HeroComp/>
+      <PromotionComp/>
+      <Products/>
+      <AboutProduct/>
+      <NewsLetterComp/>
     </main>
   )
 }
