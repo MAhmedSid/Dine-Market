@@ -17,16 +17,16 @@ const sora = Sora({ subsets: ['latin'] })
 
 
 const HeroComp = () => {
-  return <section className="flex justify-center">
+  return <section className="h-full w-full flex justify-center px-5 tablet:px-0">
 <Wrapper>
-    <div className="flex h-[80vh] w-full">
+    <div className="flex  w-full">
 
 
     <div className="flex-[0.5] flex flex-col justify-center  gap-y-10 pt-16">
 
     <p className={`${sora.className} px-5 py-2 w-fit rounded-md font-semibold text-[#001aff] bg-[#e1edff] `}>Sale 70%</p>
 
-    <h1 className={`${sora.className} text-pri_black text-5xl font-bold tracking-wider`}>An Industrial Take on Streetwear</h1>
+    <h1 className={`${sora.className} text-pri_black text-5xl font-bold tracking-wider leading-[60px]`}>An Industrial Take on Streetwear</h1>
 
     <p className={`${sora.className} text-stone-600 max-w-[450px]`}>Anyone can beat you but no one can beat your outfit as long as you wear Dine outfits.</p>
 
@@ -45,7 +45,7 @@ const HeroComp = () => {
             </svg> 
             <p className={`${sora.className} font-medium `}>Start Shopping</p></button>
 
-    <div className="grid grid-cols-4 h-fit w-full  mt-24">
+    <div className="grid grid-cols-2 tablet:grid-cols-4 h-fit w-full  mt-0 tablet:mt-24 gap-y-4 tablet:gap-y-0 ">
     <Image src={featured1} alt="Dine Market" className="min-h-[35px] w-auto" />
     <Image src={featured2} alt="Dine Market" className="min-h-[35px] w-auto" />
     <Image src={featured3} alt="Dine Market" className="min-h-[35px] w-auto" />
@@ -55,7 +55,7 @@ const HeroComp = () => {
 
     </div>
 
-        <div className="flex-[0.5] relative flex justify-center items-center1">
+        <div className="flex-[0.5] relative hidden lp:flex justify-center items-center1">
         <Image src={MainImg} alt="Hero Image" className="m-auto"/>
 
         <div className="h-full w-full absolute -z-10 flex justify-center items-center">

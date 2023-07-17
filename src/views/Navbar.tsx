@@ -1,29 +1,41 @@
+'use client'
 import Wrapper from '@/components/Wrapper'
 import React from 'react'
 
 import logo from '/public/images/logo.png'
 import Image from 'next/image'
+
+import Drawer from 'react-modern-drawer'
+import 'react-modern-drawer/dist/index.css'
+
+import { Fade as Hamburger } from 'hamburger-react'
+
 import Link from 'next/link'
 import { Sora } from 'next/font/google'
-
 
 const sora = Sora({ subsets: ['latin'] })
 
 const Navbar = () => {
-  return (
-    <header className={`h-full w-full py-7 flex justify-center ${sora.className}`}>
-      <Wrapper>
-        <div className="flex h-auto w-full justify-between items-center">
-          <Image src={logo} alt="Dine Market logo" className='w-fit min-w-[150px] h-auto ' />
+  const [isOpen, setIsOpen] = React.useState(false)
 
-          <nav className="flex gap-x-10">
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState)
+  }
+
+  return (
+    <header className={` flex h-full w-full justify-center py-7 ${sora.className}`}>
+      <Wrapper>
+        <div className="flex h-auto w-full items-center justify-between px-5 lp:px-0">
+          <Image src={logo} alt="Dine Market logo" className="h-auto w-fit min-w-[150px] " />
+
+          <nav className="hidden gap-x-10 lp:flex">
             <Link href={'/'}>Female</Link>
             <Link href={'/'}>Male</Link>
             <Link href={'/'}>Kids</Link>
             <Link href={'/'}>All Products</Link>
           </nav>
 
-          <div className="flex border border-gray- gap-x-3 justify-center items-center px-2 py-1 min-w-[400px] rounded-full">
+          <div className="border-gray- hidden min-w-[400px] items-center justify-center gap-x-3 rounded-full border px-2 py-1 lp:flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -38,7 +50,7 @@ const Navbar = () => {
             <input type="text" placeholder="What you looking for" className="w-full focus:outline-transparent " />
           </div>
 
-          <div className="relative flex items-center justify-center bg-[#f1f1f1] p-3 rounded-full">
+          <div className=" relative  hidden items-center justify-center rounded-full bg-[#f1f1f1] p-3 lp:flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -51,9 +63,55 @@ const Navbar = () => {
                 data-original="#000000"
               ></path>
             </svg>
-            <div className='absolute -top-1 -right-1 flex justify-center items-center bg-red-600 h-5 w-5 rounded-full text-white text-xs'>0</div>
+            <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-xs text-white">
+              0
+            </div>
+          </div>
+
+          <div className="z-[99999] block h-fit w-fit lp:hidden">
+            <Hamburger toggled={isOpen} toggle={setIsOpen} duration={0.5} distance="sm" easing="ease-in" rounded />
           </div>
         </div>
+
+        <Drawer
+          open={isOpen}
+          onClose={toggleDrawer}
+          direction="right"
+          lockBackgroundScroll={true}
+          size={'100vw'}
+          className="block  max-h-[100vh] lp:hidden"
+        >
+          <div className="h-full w-full ">
+            <div className="flex h-[100px] items-center justify-start pl-7">
+              <Image src={logo} alt="Dine Market logo" className="h-auto w-fit min-w-[150px] " />
+            </div>
+            <div className="flex flex-col items-center justify-center pt-40">
+              <div className=" relative   items-center justify-center rounded-full bg-[#f1f1f1] p-3 flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  enableBackground="new 0 0 512 512"
+                  viewBox="0 0 511.997 511.997"
+                >
+                  <path
+                    d="M405.387 362.612c-35.202 0-63.84 28.639-63.84 63.84s28.639 63.84 63.84 63.84 63.84-28.639 63.84-63.84-28.639-63.84-63.84-63.84zm0 89.376c-14.083 0-25.536-11.453-25.536-25.536s11.453-25.536 25.536-25.536c14.083 0 25.536 11.453 25.536 25.536s-11.453 25.536-25.536 25.536zm102.54-336.113a19.128 19.128 0 00-15.079-7.348H118.22l-17.237-72.12a19.16 19.16 0 00-18.629-14.702H19.152C8.574 21.704 0 30.278 0 40.856s8.574 19.152 19.152 19.152h48.085l62.244 260.443a19.153 19.153 0 0018.629 14.702h298.135c8.804 0 16.477-6.001 18.59-14.543l46.604-188.329a19.185 19.185 0 00-3.512-16.406zM431.261 296.85H163.227l-35.853-150.019h341.003L431.261 296.85zm-257.615 65.762c-35.202 0-63.84 28.639-63.84 63.84s28.639 63.84 63.84 63.84 63.84-28.639 63.84-63.84-28.639-63.84-63.84-63.84zm0 89.376c-14.083 0-25.536-11.453-25.536-25.536s11.453-25.536 25.536-25.536 25.536 11.453 25.536 25.536-11.453 25.536-25.536 25.536z"
+                    className="hovered-path custom-cursor-on-hover"
+                    data-original="#000000"
+                  ></path>
+                </svg>
+                <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-xs text-white">
+                  0
+                </div>
+              </div>
+              <nav className="flex flex-col items-center justify-center gap-y-5 pt-10">
+                <Link href={'/'}>Female</Link>
+                <Link href={'/'}>Male</Link>
+                <Link href={'/'}>Kids</Link>
+                <Link href={'/'}>All Products</Link>
+              </nav>
+            </div>
+          </div>
+        </Drawer>
       </Wrapper>
     </header>
   )

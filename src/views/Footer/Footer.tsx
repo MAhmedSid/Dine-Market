@@ -19,7 +19,7 @@ const Footer = () => {
   return (
     <section className={`flex flex-col h-full w-full justify-center items-center  ${sora.className}`}>
       <Wrapper>
-        <div className="flex gap-x-32 py-32">
+        <div className="flex flex-col lp:flex-row tablet:gap-x-32 py-10 px-10 tablet:px-0 tablet:py-32">
           <div className="flex flex-col gap-y-8">
             <Image src={logo} alt="ssh" className="w-40" />
             <p className="max-w-[450px] text-gray-500">
@@ -44,7 +44,7 @@ const Footer = () => {
               />
             </div>
           </div>
-          <div className="flex gap-x-32 text-gray-500">
+          <div className="flex flex-col lp:flex-row  pt-10 tablet:pt-0 gap-y-8 tablet:gap-x-32 text-gray-500">
             <div className="flex flex-col gap-y-4">
               <h5 className="text-lg font-bold ">Company</h5>
               <ul className="flex flex-col gap-y-4">
@@ -76,12 +76,12 @@ const Footer = () => {
         </div>
       </Wrapper>
 
-      <div className="flex h-full w-full items-center justify-around border-t border-pri_black text-gray-500 py-4">
-        <p className=" ">Copyright © 2023 Dine Market</p>
-        <p>
+      <div className="flex flex-col tablet:flex-row h-full w-full items-center justify-around border-t border-pri_black text-gray-500 gap-y-5 py-4 px-5 tablet:px-0">
+        <p className="text-center">Copyright © 2023 Dine Market</p>
+        <p className='text-center'>
           Design by. <span className="text-black font-bold">Weird Design Studio</span>
         </p>
-        <p>
+        <p className='text-center'>
           Code by. <span className="text-black font-bold"><Link target='_blank' href={"https://github.com/MAhmedSid/Dine-Market"}>M. Ahmed Siddiqui on github</Link></span>
         </p>
       </div>

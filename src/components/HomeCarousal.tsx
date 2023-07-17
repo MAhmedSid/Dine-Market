@@ -25,33 +25,32 @@ const HomeCarousal = () => {
           slidesPerView: 3,
         },
       }}
-      slidesPerView={3}
       autoHeight={false}
       className={`w-full h-full   ${sora.className}`}
     >
       <SwiperSlide className="cursor-pointer pt-10">
-        <div className="flex h-fit w-full flex-col gap-y-2 px-10  transition-all duration-300 hover:scale-110">
+        <div className="flex h-fit w-full flex-col gap-y-2 tablet:px-10  transition-all duration-300 hover:scale-110">
           <Image src={img} alt="ssh" className="h-fit w-full" />
           <p className="font-bold tracking-widest">Pink Fleece Sweatpants</p>
           <p className="text-lg font-bold">$195</p>
         </div>
       </SwiperSlide>
       <SwiperSlide className="cursor-pointer pt-10">
-        <div className="flex h-fit w-full flex-col gap-y-2 px-10">
+        <div className="flex h-fit w-full flex-col gap-y-2 tablet:px-10 ">
           <Image src={img} alt="ssh" className="h-fit w-full" />
           <p className="font-bold tracking-widest">Pink Fleece Sweatpants</p>
           <p className="text-lg font-bold">$195</p>
         </div>
       </SwiperSlide>
       <SwiperSlide className="cursor-pointer pt-10">
-        <div className="flex h-fit w-full flex-col gap-y-2 px-10">
+        <div className="flex h-fit w-full flex-col gap-y-2 tablet:px-10 ">
           <Image src={img} alt="ssh" className="h-fit w-full" />
           <p className="font-bold tracking-widest">Pink Fleece Sweatpants</p>
           <p className="text-lg font-bold">$195</p>
         </div>
       </SwiperSlide>
       <SwiperSlide className="cursor-pointer pt-10">
-        <div className="flex h-fit w-full flex-col gap-y-2 px-10">
+        <div className="flex h-fit w-full flex-col gap-y-2 tablet:px-10 ">
           <Image src={img} alt="ssh" className="h-fit w-full" />
           <p className="font-bold tracking-widest">Pink Fleece Sweatpants</p>
           <p className="text-lg font-bold">$195</p>
