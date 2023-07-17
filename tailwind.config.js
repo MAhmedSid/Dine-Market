@@ -16,6 +16,14 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        "mb": "320px",
+        "lmb": "480px",
+        "tablet": "768px",
+        "lp": "1024px",
+        "lcd": "1400px"
+
+      },
       colors: {
         pri_black: "#212121",
         border: "hsl(var(--border))",
