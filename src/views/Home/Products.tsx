@@ -10,7 +10,7 @@ const Products = () => {
         <div className="flex h-full w-full flex-col items-center justify-center gap-y-5">
           <h3 className="text-sm font-bold tracking-wider text-blue-600">PRODUCTS</h3>
           <h4 className="text-4xl font-bold text-pri_black">Check What We Have</h4>
-          <div className='w-full h-[500px] tablet:h-[800px]  '>
+          <div className='w-full max-w-[400px] tablet:max-w-none h-[500px] tablet:h-[800px]  '>
           <HomeCarousal/>
           </div>
         </div>

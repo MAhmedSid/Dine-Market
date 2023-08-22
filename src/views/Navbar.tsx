@@ -25,14 +25,14 @@ const Navbar = () => {
   return (
     <header className={` flex h-full w-full justify-center py-7 ${sora.className}`}>
       <Wrapper>
-        <div className="flex h-auto w-full items-center justify-between px-5 lp:px-0">
+        <div className="flex h-auto w-full items-center justify-between px-5 lp:px-5">
           <Image src={logo} alt="Dine Market logo" className="h-auto w-fit min-w-[150px] " />
 
           <nav className="hidden gap-x-10 lp:flex">
-            <Link href={'/'}>Female</Link>
-            <Link href={'/'}>Male</Link>
-            <Link href={'/'}>Kids</Link>
-            <Link href={'/'}>All Products</Link>
+            <Link href={'/women'}>Female</Link>
+            <Link href={'/men'}>Male</Link>
+            <Link href={'/kids'}>Kids</Link>
+            <Link href={'/products'}>All Products</Link>
           </nav>
 
           <div className="border-gray- hidden min-w-[400px] items-center justify-center gap-x-3 rounded-full border px-2 py-1 lp:flex">
@@ -104,10 +104,11 @@ const Navbar = () => {
                 </div>
               </div>
               <nav className="flex flex-col items-center justify-center gap-y-5 pt-10">
-                <Link href={'/'}>Female</Link>
-                <Link href={'/'}>Male</Link>
-                <Link href={'/'}>Kids</Link>
-                <Link href={'/'}>All Products</Link>
+                <Link onClick={toggleDrawer} href={'/'}>Home</Link>
+                <Link onClick={toggleDrawer} href={'/women'}>Female</Link>
+                <Link onClick={toggleDrawer} href={'/men'}>Male</Link>
+                <Link onClick={toggleDrawer} href={'/kids'}>Kids</Link>
+                <Link onClick={toggleDrawer} href={'/products'}>All Products</Link>
               </nav>
             </div>
           </div>

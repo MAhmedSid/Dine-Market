@@ -10,9 +10,9 @@ const sora = Sora({ subsets: ['latin'] })
 
 const AboutProduct = () => {
   return (
-    <section className={`${sora.className} flex h-full w-full justify-center px-5 pt-20 tablet:px-0`}>
+    <section className={`${sora.className} flex h-full w-full justify-center px-5  tablet:px-0`}>
       <Wrapper>
-        <div className="flex pb-4 pt-20 tablet:justify-end">
+        <div className="flex pb-4 pt-20 tablet:justify-end tablet:pb-20">
           <h3 className="max-w-[600px]  text-center text-4xl font-extrabold h-auto !leading-[4rem] tablet:text-left tablet:text-5xl">
             Unique and Authentic Vintage Designer Jewellery
           </h3>

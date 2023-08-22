@@ -17,7 +17,7 @@ const NewsLetterComp = () => {
             <input
               type="text"
               placeholder="Input email address"
-              className="w-full tablet:w-[300px] border border-gray-400 px-4 py-2 text-xs"
+              className="w-full max-w-[300px] tablet:max-w-none tablet:w-[300px] border border-gray-400 px-4 py-2 text-xs"
             />
             <button className="flex w-fit gap-x-2  border-2 border-b-black border-l-gray-600 border-r-black border-t-gray-600 bg-black px-5 py-2 text-sm font-semibold text-white">
               Get Started

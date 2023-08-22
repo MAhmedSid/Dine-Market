@@ -17,7 +17,7 @@ const sora = Sora({ subsets: ['latin'] })
 
 
 const HeroComp = () => {
-  return <section className="h-full w-full flex justify-center px-5 tablet:px-0">
+  return <section className="h-full w-full flex justify-center px-5 tablet:px-5">
 <Wrapper>
     <div className="flex  w-full">
 
@@ -45,7 +45,7 @@ const HeroComp = () => {
             </svg> 
             <p className={`${sora.className} font-medium `}>Start Shopping</p></button>
 
-    <div className="grid grid-cols-2 tablet:grid-cols-4 h-fit w-full  mt-0 tablet:mt-24 gap-y-4 tablet:gap-y-0 ">
+    <div className="grid grid-cols-2 tablet:grid-cols-4 h-fit w-full  mt-0 tablet:mt-24 gap-y-4 tablet:gap-y-0 tablet:gap-x-4 ">
     <Image src={featured1} alt="Dine Market" className="min-h-[35px] w-auto" />
     <Image src={featured2} alt="Dine Market" className="min-h-[35px] w-auto" />
     <Image src={featured3} alt="Dine Market" className="min-h-[35px] w-auto" />
@@ -56,10 +56,10 @@ const HeroComp = () => {
     </div>
 
         <div className="flex-[0.5] relative hidden lp:flex justify-center items-center1">
-        <Image src={MainImg} alt="Hero Image" className="m-auto"/>
+        <Image src={MainImg} alt="Hero Image" className="m-auto lp:h-[400px] lcd:h-[600px] lp:w-auto"/>
 
         <div className="h-full w-full absolute -z-10 flex justify-center items-center">
-        <div className=" w-full h-full max-h-[550px] max-w-[550px] bg-[#ffece3] rounded-full " />
+        <div className=" w-full h-full max-h-[350px] lcd:max-h-[550px] max-w-[350px] lcd:max-w-[550px] bg-[#ffece3] rounded-full " />
         </div>
 
         </div>

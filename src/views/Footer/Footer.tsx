@@ -19,7 +19,7 @@ const Footer = () => {
   return (
     <section className={`flex flex-col h-full w-full justify-center items-center  ${sora.className}`}>
       <Wrapper>
-        <div className="flex flex-col lp:flex-row tablet:gap-x-32 py-10 px-10 tablet:px-0 tablet:py-32">
+        <div className="flex flex-col lp:flex-row tablet:gap-x-32 py-10 px-10 tablet:px-5 tablet:py-32">
           <div className="flex flex-col gap-y-8">
             <Image src={logo} alt="ssh" className="w-40" />
             <p className="max-w-[450px] text-gray-500">
@@ -44,7 +44,7 @@ const Footer = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col lp:flex-row  pt-10 tablet:pt-0 gap-y-8 tablet:gap-x-32 text-gray-500">
+          <div className="flex flex-col tablet:flex-row  pt-10 tablet:pt-10 gap-y-8 tablet:gap-x-32 text-gray-500">
             <div className="flex flex-col gap-y-4">
               <h5 className="text-lg font-bold ">Company</h5>
               <ul className="flex flex-col gap-y-4">
