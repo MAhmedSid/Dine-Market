@@ -3,7 +3,7 @@ import React from 'react'
 import { groq } from 'next-sanity'
 import client from '@/lib/sanityclient'
 import ProductCard from '@/components/ProductCard'
-import { ISanityProduct } from '../../../interfaces'
+import { ISanityProduct } from '../../../types'
 
 const page = async () => {
   const data = await client.fetch(groq`*[_type == "product" && productCategory->productSubCategory == "women"]`)

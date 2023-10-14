@@ -13,6 +13,10 @@ import { Fade as Hamburger } from 'hamburger-react'
 import Link from 'next/link'
 import { Sora } from 'next/font/google'
 
+import { UserButton } from "@clerk/nextjs";
+
+
+
 const sora = Sora({ subsets: ['latin'] })
 
 const Navbar = () => {
@@ -67,6 +71,9 @@ const Navbar = () => {
               0
             </div>
           </div>
+
+          <UserButton afterSignOutUrl="/"/>
+
 
           <div className="z-[99999] block h-fit w-fit lp:hidden">
             <Hamburger toggled={isOpen} toggle={setIsOpen} duration={0.5} distance="sm" easing="ease-in" rounded />

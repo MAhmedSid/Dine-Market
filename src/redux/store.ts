@@ -3,10 +3,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { TypedUseSelectorHook } from 'react-redux';
-
+import cartReducer from "./features/cartSlice"
 
 export const store = configureStore({
-  reducer: {}
+  reducer: {
+    cart: cartReducer
+  }
 });
 
 type RootState = ReturnType<typeof store.getState>

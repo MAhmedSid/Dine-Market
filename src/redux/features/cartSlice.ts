@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IProduct } from "../../../interfaces";
+import { IProduct } from "../../../types";
 
 interface CartState {
     items: Array<IProduct>;
@@ -29,10 +29,47 @@ export const cartSlice = createSlice({
                 const totalPrice = action.payload.quantity * newItem.price
                 state.items.push({...newItem, quantity:action.payload.quantity, totalPrice});
             }else{
-                const totalPrice =  existingItem.totalPrice + action.payload.quantity * action.payload;
-
-
+                const totalPrice =  existingItem.totalPrice + action.payload.quantity * action.payload.product.price;
+                existingItem.quantity += action.payload.quantity;
+                existingItem.totalPrice = totalPrice;
             }
+        },
+        removeProduct(state:CartState,action:PayloadAction<string>){
+
+            const productId = action.payload;
+
+            state.items = state.items.filter(item => item._id !== productId);
+            state.totalQuantity = state.items.reduce((total,item )=> total + item.quantity,0);
+            state.totalAmount = state.items.reduce((total,item)=> total + item.totalPrice,0);
+
+        },
+        decrementCartProduct(state:CartState,action:PayloadAction<string>){
+            const productId = action.payload;
+            const existingItem = state.items.find(item => item._id === productId);
+
+            state.totalQuantity-- ; 
+            state.totalAmount -= existingItem?.price! ; 
+        if(existingItem?.quantity === 1){
+            state.items = state.items.filter(item => item._id !== productId);
+        }else{
+            existingItem!.quantity-- ;
+            existingItem!.totalPrice -= existingItem!.price;
         }
+        },
+        incrementCartProduct(state:CartState,action:PayloadAction<string>){
+            const productId = action.payload;
+            const existingItem = state.items.find(item => item._id === productId);
+
+            state.totalQuantity++ ; 
+            state.totalAmount += existingItem?.price! ; 
+       
+            existingItem!.quantity++ ;
+            existingItem!.totalPrice += existingItem!.price;
+        
+        },
     }
 })
+
+export const cartAction = cartSlice.actions;
+
+export default cartSlice.reducer;

@@ -3,6 +3,8 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Footer from '@/views/Footer/Footer'
+import Providers from '@/components/utils/Providers'
+import { ClerkProvider } from '@clerk/nextjs'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,9 +18,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className='text-pri_black'>
      
       <body className={inter.className}>
+      <ClerkProvider>
+      <Providers>
       <Navbar/>
         {children}
         <Footer/>
+      </Providers>
+      </ClerkProvider>
         </body>
     </html>
   )
