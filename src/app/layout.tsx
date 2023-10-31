@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import Footer from '@/views/Footer/Footer'
 import Providers from '@/components/utils/Providers'
 import { ClerkProvider } from '@clerk/nextjs'
+import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,7 +18,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className='text-pri_black'>
      
-      <body className={inter.className}>
+      <body className={`${inter.className} w-full `}>
+        <Toaster/>
       <ClerkProvider>
       <Providers>
       <Navbar/>

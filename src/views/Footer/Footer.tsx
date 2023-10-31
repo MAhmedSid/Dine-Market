@@ -76,13 +76,13 @@ const Footer = () => {
         </div>
       </Wrapper>
 
-      <div className="flex flex-col tablet:flex-row h-full w-full items-center justify-around border-t border-pri_black text-gray-500 gap-y-5 py-4 px-5 tablet:px-0">
+      <div className="flex flex-col tablet:flex-row h-full w-full items-center justify-around bg-pri_black text-gray-500 gap-y-5 py-4 px-5 tablet:px-0">
         <p className="text-center">Copyright © 2023 Dine Market</p>
         <p className='text-center'>
-          Design by. <span className="text-black font-bold">Weird Design Studio</span>
+          Design by. <span className="text-zinc-200 font-semibold">Weird Design Studio</span>
         </p>
         <p className='text-center'>
-          Code by. <span className="text-black font-bold"><Link target='_blank' href={"https://github.com/MAhmedSid/Dine-Market"}>M. Ahmed Siddiqui on github</Link></span>
+          Code by. <span className="text-zinc-200 font-semibold"><Link target='_blank' href={"https://github.com/MAhmedSid/Dine-Market"}>M. Ahmed Siddiqui on github</Link></span>
         </p>
       </div>
 

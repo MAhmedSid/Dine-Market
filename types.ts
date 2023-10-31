@@ -1,4 +1,4 @@
-import { Image } from "sanity"
+import { Image } from 'sanity'
 
 export interface ISanityProduct {
   productPrice: number
@@ -18,9 +18,14 @@ export interface IProduct {
   _id: string
   name: string
   price: number
-  totalPrice: number
+  image: Image
   subcat: string
-  image: Array<Image>
-  userId: string
   quantity: number
+  totalPrice: number
+}
+
+export interface IDbRow {
+  user_id: string
+  product_qty: string
+  product_id: string
 }

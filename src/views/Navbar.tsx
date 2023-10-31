@@ -1,6 +1,6 @@
 'use client'
 import Wrapper from '@/components/Wrapper'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import logo from '/public/images/logo.png'
 import Image from 'next/image'
@@ -13,14 +13,65 @@ import { Fade as Hamburger } from 'hamburger-react'
 import Link from 'next/link'
 import { Sora } from 'next/font/google'
 
-import { UserButton } from "@clerk/nextjs";
-
-
+import { UserButton, useUser } from '@clerk/nextjs'
+import { useAppDispatch, useAppSelector } from '@/redux/store'
+import { setCart } from '@/redux/features/cartReducer'
+import { groq } from 'next-sanity'
+import client from '@/lib/sanityclient'
 
 const sora = Sora({ subsets: ['latin'] })
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = React.useState(false)
+  const dispatch = useAppDispatch()
+  const cartVal = useAppSelector((state) => {
+    return state.cart.totalQuantity
+  })
+  const userObj = useUser()
+  const [isOpen, setIsOpen] = useState(false)
+  let effectRender = false
+
+  useEffect(() => {
+    ;(async function () {
+      if (effectRender) return
+      if (userObj.isSignedIn === false) {
+        return
+      }
+      //GET req will fetch cart on this api path.
+      const res = await fetch(`/api/getCart/${userObj.user?.id}`, { cache: 'no-cache', method: 'GET' })
+      if (res.ok === true) {
+        const body = await res.json()
+        const data: any[] = body.data
+        const totalQty: number = data?.reduce((preval: any, currval: any) => preval.product_qty + currval.product_qty)
+
+        const productIds = []
+
+        for (let item of body.data) {
+          productIds.push(item.product_id)
+        }
+        const prdtData: any[] = await client.fetch(groq`*[_type == "product" && _id in [${productIds
+          .map((id) => `"${id}"`)
+          .join(',')}] ]{
+        _id,
+        "name":productName,
+        "price":productPrice,
+        "image":   mainImg.asset->url,
+        "subcat": productCategory->productSubCategory,
+      }`)
+
+        const prdtData_with_qty = prdtData.map((prdt) => {
+          return {
+            ...prdt,
+            quantity: body.data.find((item: any) => item.product_id == prdt._id).product_qty,
+            totalPrice: body.data.find((item: any) => item.product_id == prdt._id).product_qty * prdt.price,
+          }
+        })
+
+        dispatch(setCart({ totalQty, items: prdtData_with_qty }))
+
+        effectRender = true
+      }
+    })()
+  }, [userObj.isSignedIn])
 
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState)
@@ -30,7 +81,9 @@ const Navbar = () => {
     <header className={` flex h-full w-full justify-center py-7 ${sora.className}`}>
       <Wrapper>
         <div className="flex h-auto w-full items-center justify-between px-5 lp:px-5">
-          <Image src={logo} alt="Dine Market logo" className="h-auto w-fit min-w-[150px] " />
+          <Link href={'/'}>
+            <Image src={logo} alt="Dine Market logo" className="h-auto w-fit min-w-[150px] " />
+          </Link>
 
           <nav className="hidden gap-x-10 lp:flex">
             <Link href={'/women'}>Female</Link>
@@ -54,7 +107,10 @@ const Navbar = () => {
             <input type="text" placeholder="What you looking for" className="w-full focus:outline-transparent " />
           </div>
 
-          <div className=" relative  hidden items-center justify-center rounded-full bg-[#f1f1f1] p-3 lp:flex">
+          <Link
+            href={'/cart'}
+            className="relative hidden items-center justify-center  rounded-full bg-[#f1f1f1] p-3 transition-all duration-150 hover:scale-110 lp:flex"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -68,12 +124,20 @@ const Navbar = () => {
               ></path>
             </svg>
             <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-xs text-white">
-              0
+              {cartVal == null ? '0' : cartVal}
             </div>
-          </div>
+          </Link>
 
-          <UserButton afterSignOutUrl="/"/>
-
+          {userObj.isSignedIn ? (
+            <UserButton afterSignOutUrl="/" />
+          ) : (
+            <Link
+              href="/sign-in"
+              className=" my-1 rounded-full bg-pri_black bg-opacity-10 px-4 py-2 text-pri_black transition-all  duration-100 hover:bg-transparent"
+            >
+              Sign In
+            </Link>
+          )}
 
           <div className="z-[99999] block h-fit w-fit lp:hidden">
             <Hamburger toggled={isOpen} toggle={setIsOpen} duration={0.5} distance="sm" easing="ease-in" rounded />
@@ -93,7 +157,7 @@ const Navbar = () => {
               <Image src={logo} alt="Dine Market logo" className="h-auto w-fit min-w-[150px] " />
             </div>
             <div className="flex flex-col items-center justify-center pt-40">
-              <div className=" relative   items-center justify-center rounded-full bg-[#f1f1f1] p-3 flex">
+              <div className=" relative   flex items-center justify-center rounded-full bg-[#f1f1f1] p-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -107,15 +171,25 @@ const Navbar = () => {
                   ></path>
                 </svg>
                 <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-xs text-white">
-                  0
+                  {cartVal == null ? '0' : cartVal}
                 </div>
               </div>
               <nav className="flex flex-col items-center justify-center gap-y-5 pt-10">
-                <Link onClick={toggleDrawer} href={'/'}>Home</Link>
-                <Link onClick={toggleDrawer} href={'/women'}>Female</Link>
-                <Link onClick={toggleDrawer} href={'/men'}>Male</Link>
-                <Link onClick={toggleDrawer} href={'/kids'}>Kids</Link>
-                <Link onClick={toggleDrawer} href={'/products'}>All Products</Link>
+                <Link onClick={toggleDrawer} href={'/'}>
+                  Home
+                </Link>
+                <Link onClick={toggleDrawer} href={'/women'}>
+                  Female
+                </Link>
+                <Link onClick={toggleDrawer} href={'/men'}>
+                  Male
+                </Link>
+                <Link onClick={toggleDrawer} href={'/kids'}>
+                  Kids
+                </Link>
+                <Link onClick={toggleDrawer} href={'/products'}>
+                  All Products
+                </Link>
               </nav>
             </div>
           </div>
