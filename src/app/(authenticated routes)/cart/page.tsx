@@ -1,4 +1,5 @@
 import CartCard from '@/components/CartCard'
+import CheckoutComp from '@/components/CheckoutComp'
 import Wrapper from '@/components/Wrapper'
 import { cartTable, db } from '@/lib/dbClient'
 import client from '@/lib/sanityclient'
@@ -25,6 +26,12 @@ export default async function page() {
   "category": productCategory->productSubCategory,
   "slug": slug.current
 }`)
+  const productData = products.map((prdt:any)=>{
+    return {
+      ...prdt,
+      quantity: data.find((item:any)=>item.product_id == prdt._id)?.product_qty,
+    }
+  })
   return (
     <main className="flex h-full min-h-[50vh] w-full justify-center">
       <Wrapper>
@@ -40,7 +47,7 @@ export default async function page() {
             </div>
           </div>
           <div>
-            <h2 className="text-3xl font-bold">Check out Details</h2>
+            <CheckoutComp prdtData={productData} />
           </div>
         </section>
       </Wrapper>
