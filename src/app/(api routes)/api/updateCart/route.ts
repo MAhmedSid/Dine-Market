@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { eq } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import { Cart, cartTable, db } from '@/lib/dbClient'
 
 
@@ -10,11 +10,9 @@ export async function POST(req: NextRequest) {
     const qty_arr = await db
     .select({ product_qty: cartTable.product_qty })
     .from(cartTable)
-    .where(eq(cartTable.user_id, body.user_id))
+    .where(and(eq(cartTable.user_id, body.user_id),eq(cartTable.product_id,body.product_id)))
     .execute()
     const qty = qty_arr[0]?.product_qty ? qty_arr[0]?.product_qty : 0
-
-    console.log("QTY FROM Update Cart",qty);
 
     const data = await db
     .insert(cartTable)
