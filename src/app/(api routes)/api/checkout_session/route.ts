@@ -1,3 +1,4 @@
+import { metadata } from './../../../layout';
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -24,6 +25,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
               currency: 'usd',
               product_data:{
                 name: item.productName,
+                metadata:{
+                  id: item._id
+                }
               },
               unit_amount: item.productPrice * 100,
             },
