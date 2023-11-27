@@ -1,15 +1,17 @@
 'use client'
 import getStripe from '@/utils/get-stripejs'
+import { useUser } from '@clerk/nextjs';
 import React from 'react'
 
 function CheckoutComp({prdtData}:{prdtData:any}) {
+  const { isLoaded, isSignedIn, user } = useUser();
   const handleCheckout = async (e: React.MouseEvent) => {
     const products = prdtData;
     try {
       const response = await fetch('/api/checkout_session', {
         method: 'POST',
         headers: {"Content-Type":"application/json"} ,
-        body: JSON.stringify(products),
+        body: JSON.stringify({products, user_id: user?.id}),
         cache: 'no-store',
       })
 

@@ -19,7 +19,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         shipping_options: [
           {shipping_rate:'shr_1OFGLWHydXzpBiHeloq3hBlG'}
         ],
-        line_items: body.map((item:any)=>{
+        line_items: body.products.map((item:any)=>{
           return {
             price_data: {
               currency: 'usd',
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         }),
         payment_intent_data:{
           metadata:{
-            id: body[0]._id
+            user_id: body.user_id
           }
         }
       });
