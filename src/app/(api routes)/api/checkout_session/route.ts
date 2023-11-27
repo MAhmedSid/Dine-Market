@@ -12,7 +12,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       const session = await stripe.checkout.sessions.create({
         mode: 'payment',
         success_url: `${origin}/orderdone`,
-        cancel_url: `${origin}/ordercancelled`,
+        cancel_url: `${origin}/cart`,
         submit_type:'pay',
         payment_method_types: ['card'],
         billing_address_collection: 'auto',
