@@ -32,8 +32,14 @@ export async function POST(req: NextRequest, res: NextResponse) {
               unit_amount: item.productPrice * 100,
             },
             quantity: item.quantity,
+            
           }
-        })
+        }),
+        payment_intent_data:{
+          metadata:{
+            id: body[0]._id
+          }
+        }
       });
       return NextResponse.json({ session });
 
