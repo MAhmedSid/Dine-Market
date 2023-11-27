@@ -11,19 +11,22 @@ export async function POST(req: NextRequest) {
   const body = await req.json()
   const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-  await stripe.checkout.sessions.listLineItems(
+  const prdts_data = await stripe.checkout.sessions.listLineItems(
     body.data.object.id,
-    { limit: 5 },
-    function(err:any, lineItems:any) {
-      console.log("LINE ITEMS FROM CALLBACK", lineItems);
-      const items: any[] = lineItems.data;
+    {expand: ['data.price.product']},
+    // { limit: 5 },
+    // function(err:any, lineItems:any) {
+    //   console.log("LINE ITEMS FROM CALLBACK", lineItems);
+    //   const items: any[] = lineItems.data;
 
       
 
-    }
+    // }
   )
 
 try {
+   console.log(prdts_data,
+    "PRDT DATA");
    console.log("WEBHOOK Runs");
    console.log("BODY EVENT",body);
 
