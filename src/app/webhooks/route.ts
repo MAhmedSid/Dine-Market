@@ -1,4 +1,7 @@
+import { cartTable, db } from '@/lib/dbClient';
 import getStripe from '@/utils/get-stripejs';
+import { eq } from 'drizzle-orm';
+import { drizzle } from 'drizzle-orm/vercel-postgres';
 import { NextRequest, NextResponse } from 'next/server'
 // import Stripe from 'stripe';
 const Stripe = require('stripe');
@@ -14,22 +17,14 @@ export async function POST(req: NextRequest) {
   const prdts_data = await stripe.checkout.sessions.listLineItems(
     body.data.object.id,
     {expand: ['data.price.product']},
-    // { limit: 5 },
-    // function(err:any, lineItems:any) {
-    //   console.log("LINE ITEMS FROM CALLBACK", lineItems);
-    //   const items: any[] = lineItems.data;
-
-      
-
-    // }
   )
 
 try {
-    console.log("payment intent metadata", paymentIntent.metadata);
-   console.log(prdts_data,
-    "PRDT DATA");
-   console.log("WEBHOOK Runs");
-   console.log("BODY EVENT",body);
+
+  const res = await db.delete(cartTable).where(eq(cartTable.user_id, paymentIntent.metadata.user_id)).execute()
+  console.log("RES",res);
+  console.log("payment intent metadata", paymentIntent.metadata);
+  console.log("BODY EVENT",body);
 
     return NextResponse.json(
       JSON.stringify({
