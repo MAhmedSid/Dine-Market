@@ -41,8 +41,7 @@ const Navbar = () => {
       if (res.ok === true) {
         const body = await res.json()
         const data: any[] = body.data
-        const totalQty: number = data?.reduce((preval: any, currval: any) => preval.product_qty + currval.product_qty)
-
+        const totalQty: number = data?.reduce((sum: number, curVal: any) => sum + curVal.product_qty, 0)
         const productIds = []
 
         for (let item of body.data) {
@@ -65,7 +64,6 @@ const Navbar = () => {
             totalPrice: body.data.find((item: any) => item.product_id == prdt._id).product_qty * prdt.price,
           }
         })
-
         dispatch(setCart({ totalQty, items: prdtData_with_qty }))
 
         effectRender = true

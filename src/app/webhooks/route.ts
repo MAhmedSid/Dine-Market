@@ -1,7 +1,5 @@
 import { cartTable, db } from '@/lib/dbClient';
-import getStripe from '@/utils/get-stripejs';
 import { eq } from 'drizzle-orm';
-import { drizzle } from 'drizzle-orm/vercel-postgres';
 import { NextRequest, NextResponse } from 'next/server'
 // import Stripe from 'stripe';
 const Stripe = require('stripe');

@@ -8,6 +8,7 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 
 function CartCard({ prdt, data }: { prdt: any; data: any }) {
+
   const dispatch = useAppDispatch()
   const userObj = useUser()
   const cartPrdt = useAppSelector((state) => {

@@ -40,11 +40,10 @@ export default async function page() {
             <h2 className="text-3xl font-bold">Cart Items</h2>
             <div className="flex flex-col gap-y-4">
               {/* CART CARDS  */}
-              {products &&
-                products.map((prdt: any) => {
+              {products && products.map((prdt: any) => {
                   return <CartCard key={prdt.slug} prdt={prdt} data={data} />
                 })}
-            </div>
+            </div> 
           </div>
           <div>
             <CheckoutComp prdtData={productData} />

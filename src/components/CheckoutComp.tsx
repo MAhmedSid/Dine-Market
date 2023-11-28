@@ -4,8 +4,14 @@ import { useUser } from '@clerk/nextjs';
 import React from 'react'
 
 function CheckoutComp({prdtData}:{prdtData:any}) {
+
+
   const { isLoaded, isSignedIn, user } = useUser();
+
+
   const handleCheckout = async (e: React.MouseEvent) => {
+
+
     const products = prdtData;
     try {
       const response = await fetch('/api/checkout_session', {
@@ -32,7 +38,7 @@ function CheckoutComp({prdtData}:{prdtData:any}) {
 
   return (
     <section>
-      <h2 className="text-3xl font-bold">Check out Details</h2>
+      <h2 className="text-3xl font-bold">Order Summary</h2>
       <button className="" onClick={handleCheckout}>
         Checkout
       </button>
