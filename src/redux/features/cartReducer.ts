@@ -22,14 +22,15 @@ const cartSlice = createSlice({
         addToCart(state:CartState,action: PayloadAction<{product:any,quantity:number}>){
 
             const newItem = action.payload.product;
+
             const existingItem = state.items.find(item => item._id === newItem._id);
             state.totalQuantity = Number(state.totalQuantity) + Number(action.payload.quantity); 
             state.totalAmount = Number(action.payload.product.price) * Number(action.payload.quantity);
             if(!existingItem){
-                const totalPrice = Number(action.payload.quantity) * Number(newItem.price)
+                const totalPrice = Number(action.payload.quantity) * Number(newItem.productPrice)
                 state.items.push({...newItem, quantity:action.payload.quantity, totalPrice});
             }else{
-                const totalPrice =  existingItem.totalPrice + (action.payload.quantity * action.payload.product.productPrice);
+                const totalPrice =  Number(existingItem.totalPrice) + (Number(action.payload.quantity) * Number(action.payload.product.productPrice));
                 existingItem.quantity =  Number(existingItem.quantity) + Number(action.payload.quantity);
                 existingItem.totalPrice = totalPrice;
             }

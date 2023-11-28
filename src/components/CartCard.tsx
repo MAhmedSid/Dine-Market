@@ -15,6 +15,8 @@ function CartCard({ prdt, data }: { prdt: any; data: any }) {
     return state.cart.items.find((item) => item._id === prdt._id)
   })
 
+  console.log("cart PRdt",cartPrdt);
+
   const [isMutating, setIsMutating] = useState(false)
 
   const prdtData = data.find((obj: any) => prdt._id === obj.product_id)
