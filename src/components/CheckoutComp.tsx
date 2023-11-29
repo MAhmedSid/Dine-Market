@@ -1,13 +1,15 @@
 'use client'
+import { useAppSelector } from '@/redux/store'
 import getStripe from '@/utils/get-stripejs'
 import { useUser } from '@clerk/nextjs'
 import React from 'react'
 
 function CheckoutComp({ prdtData }: { prdtData: any }) {
   const { isLoaded, isSignedIn, user } = useUser()
+  const totalCartQty = useAppSelector((state)=>state.cart.totalQuantity);
 
-  const totalQty = prdtData.reduce((sum: number, curVal: any) => sum + curVal.quantity, 0)
-  const totalAmount = prdtData.reduce((sum: number, curVal: any) => sum + curVal.productPrice * curVal.quantity, 0)
+
+  const {totalAmount,totalQty}= useAppSelector((state)=>{return {totalAmount:state.cart.totalAmount,totalQty:state.cart.totalQuantity}})
 
   const handleCheckout = async (e: React.MouseEvent) => {
     const products = prdtData
@@ -34,9 +36,9 @@ function CheckoutComp({ prdtData }: { prdtData: any }) {
   }
 
   return (
-    <section className='flex flex-col gap-y-5 shadow-lg p-10 rounded-xl'>
+    <> 
+    { totalCartQty !== 0 && <section className='flex flex-col gap-y-5 shadow-lg p-10 rounded-xl'>
       <h2 className="text-3xl font-bold">Order Summary</h2>
-
       <div className="flex flex-col gap-y-5    ">
         <div className="flex gap-x-5">
           <p className='text-lg font-semibold'>Quantity:</p>
@@ -52,7 +54,8 @@ function CheckoutComp({ prdtData }: { prdtData: any }) {
       <button className="bg-pri_black text-white hover:bg-green-700 transition-all duration-100 px-4 py-2 outline" onClick={handleCheckout}>
         Process to Checkout
       </button>
-    </section>
+    </section>}
+    </>
   )
 }
 

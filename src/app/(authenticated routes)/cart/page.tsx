@@ -5,6 +5,7 @@ import { cartTable, db } from '@/lib/dbClient'
 import client from '@/lib/sanityclient'
 import { auth } from '@clerk/nextjs'
 import { eq } from 'drizzle-orm'
+import { ShoppingBag, ShoppingCart } from 'lucide-react'
 import { groq } from 'next-sanity'
 import React from 'react'
 
@@ -33,8 +34,10 @@ export default async function page() {
     }
   })
   return (
+    
     <main className="flex h-full min-h-[50vh] w-full justify-center">
       <Wrapper>
+      {products.length !== 0 ?  
         <section className="flex flex-col tablet:flex-row h-full w-full justify-between gap-x-10 mt-20 px-4">
           <div className="w-full flex flex-col gap-y-10 ">
             <h2 className="text-2xl tablet:text-3xl font-bold">Shopping Cart</h2>
@@ -49,7 +52,14 @@ export default async function page() {
             <CheckoutComp prdtData={productData} />
           </div>
         </section>
+      :
+      <section className='w-full min-h-[50vh] flex flex-col justify-center items-center gap-y-6'>
+        <ShoppingCart className='w-10 h-10 tablet:h-20 tablet:w-20' />
+        <p className='font-semibold text-xl lmb:text-2xl tablet:text-3xl'>Your Shopping cart is empty!</p>
+      </section>
+      }
       </Wrapper>
     </main>
+    
   )
 }
