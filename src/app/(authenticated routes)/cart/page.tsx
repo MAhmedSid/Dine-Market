@@ -35,17 +35,17 @@ export default async function page() {
   return (
     <main className="flex h-full min-h-[50vh] w-full justify-center">
       <Wrapper>
-        <section className="flex h-full w-full justify-between gap-x-4">
-          <div className="">
-            <h2 className="text-3xl font-bold">Cart Items</h2>
-            <div className="flex flex-col gap-y-4">
+        <section className="flex flex-col tablet:flex-row h-full w-full justify-between gap-x-10 mt-20 px-4">
+          <div className="w-full flex flex-col gap-y-10 ">
+            <h2 className="text-2xl tablet:text-3xl font-bold">Shopping Cart</h2>
+            <div className="w-full max-w-[700px] flex flex-col items-center gap-y-4">
               {/* CART CARDS  */}
               {products && products.map((prdt: any) => {
                   return <CartCard key={prdt.slug} prdt={prdt} data={data} />
                 })}
             </div> 
           </div>
-          <div>
+          <div className='w-full max-w-[400px]'>
             <CheckoutComp prdtData={productData} />
           </div>
         </section>

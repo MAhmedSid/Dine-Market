@@ -17,9 +17,9 @@ const sora = Sora({ subsets: ['latin'] })
 
 const Footer = () => {
   return (
-    <section className={`flex flex-col h-full w-full justify-center items-center  ${sora.className}`}>
+    <section className={`flex h-full w-full flex-col items-center justify-center  ${sora.className} mt-24`}>
       <Wrapper>
-        <div className="flex flex-col lp:flex-row tablet:gap-x-32 py-10 px-10 tablet:px-5 tablet:py-32">
+        <div className="flex flex-col px-10 py-10 tablet:gap-x-32 tablet:px-5 tablet:py-32 lp:flex-row">
           <div className="flex flex-col gap-y-8">
             <Image src={logo} alt="ssh" className="w-40" />
             <p className="max-w-[450px] text-gray-500">
@@ -30,24 +30,24 @@ const Footer = () => {
               <FontAwesomeIcon
                 icon={faTwitter}
                 style={{ color: '#0d0d0d' }}
-                className="h-11 w-11 rounded-lg bg-[#f1f1f1] px-3  py-3"
+                className="h-10  w-10 rounded-lg bg-[#f1f1f1] px-3 py-3 tablet:h-11  tablet:w-11"
               />
               <FontAwesomeIcon
                 icon={faFacebookF}
                 style={{ color: '#0d0d0d' }}
-                className="h-11 w-11 rounded-lg bg-[#f1f1f1] px-3  py-3"
+                className="h-10  w-10 rounded-lg bg-[#f1f1f1] px-3 py-3 tablet:h-11  tablet:w-11"
               />
               <FontAwesomeIcon
                 icon={faLinkedinIn}
                 style={{ color: '#0d0d0d' }}
-                className="h-11 w-11 rounded-lg bg-[#f1f1f1] px-3 py-3"
+                className="h-10 w-10 rounded-lg bg-[#f1f1f1] px-3 py-3 tablet:h-11 tablet:w-11"
               />
             </div>
           </div>
-          <div className="flex flex-col tablet:flex-row  pt-10 tablet:pt-10 gap-y-8 tablet:gap-x-32 text-gray-500">
+          <div className="flex flex-wrap  gap-x-4  gap-y-4 pt-10 text-gray-500 tablet:flex-row tablet:gap-x-32">
             <div className="flex flex-col gap-y-4">
               <h5 className="text-lg font-bold ">Company</h5>
-              <ul className="flex flex-col gap-y-4">
+              <ul className="flex flex-col gap-y-4 text-xs tablet:text-base">
                 <li>About</li>
                 <li>Terms of Use</li>
                 <li>Privacy Policy</li>
@@ -58,7 +58,7 @@ const Footer = () => {
 
             <div className="flex flex-col gap-y-4">
               <h5 className="text-lg font-bold ">Support</h5>
-              <ul className="flex flex-col gap-y-4">
+              <ul className="flex flex-col gap-y-4 text-xs tablet:text-base">
                 <li>Support Carrer</li>
                 <li>24h Service</li>
                 <li>Quick Chat</li>
@@ -67,7 +67,7 @@ const Footer = () => {
 
             <div className="flex flex-col gap-y-4">
               <h5 className="text-lg font-bold ">Contact</h5>
-              <ul className="flex flex-col gap-y-4">
+              <ul className="flex flex-col gap-y-4 text-xs tablet:text-base">
                 <li>Whatsapp</li>
                 <li>Support 24h</li>
               </ul>
@@ -76,16 +76,20 @@ const Footer = () => {
         </div>
       </Wrapper>
 
-      <div className="flex flex-col tablet:flex-row h-full w-full items-center justify-around bg-pri_black text-gray-500 gap-y-5 py-4 px-5 tablet:px-0">
+      <div className="flex h-full w-full flex-col items-center justify-around gap-y-5 bg-pri_black px-5 py-4 text-gray-500 tablet:flex-row tablet:px-0">
         <p className="text-center">Copyright © 2023 Dine Market</p>
-        <p className='text-center'>
-          Design by. <span className="text-zinc-200 font-semibold">Weird Design Studio</span>
+        <p className="text-center">
+          Design by. <span className="font-semibold text-zinc-200">Weird Design Studio</span>
         </p>
-        <p className='text-center'>
-          Code by. <span className="text-zinc-200 font-semibold"><Link target='_blank' href={"https://github.com/MAhmedSid/Dine-Market"}>M. Ahmed Siddiqui on github</Link></span>
+        <p className="text-center">
+          Code by.{' '}
+          <span className="font-semibold text-zinc-200">
+            <Link target="_blank" href={'https://github.com/MAhmedSid/Dine-Market'}>
+              M. Ahmed Siddiqui on github
+            </Link>
+          </span>
         </p>
       </div>
-
     </section>
   )
 }

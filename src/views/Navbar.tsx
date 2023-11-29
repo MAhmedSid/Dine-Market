@@ -155,7 +155,7 @@ const Navbar = () => {
               <Image src={logo} alt="Dine Market logo" className="h-auto w-fit min-w-[150px] " />
             </div>
             <div className="flex flex-col items-center justify-center pt-40">
-              <div className=" relative   flex items-center justify-center rounded-full bg-[#f1f1f1] p-3">
+              <Link onClick={toggleDrawer} href={'/cart'} className=" relative   flex items-center justify-center rounded-full bg-[#f1f1f1] p-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -171,7 +171,7 @@ const Navbar = () => {
                 <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-xs text-white">
                   {cartVal == null ? '0' : cartVal}
                 </div>
-              </div>
+              </Link>
               <nav className="flex flex-col items-center justify-center gap-y-5 pt-10">
                 <Link onClick={toggleDrawer} href={'/'}>
                   Home
